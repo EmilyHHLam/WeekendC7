@@ -19,3 +19,47 @@ var peopleArray = [
   {name: "Brianna Marie Dickman", shoutout: "Shout out to Bri for noticing that I wasn't tracking and offering to go over the stuff again. She clarified things for me and I was able to move forward."},
   {name: "Daniel Zera", shoutout: "Dan because he has a great collaborative attitude and is very helpful."}
 ];
+
+$(document).ready(function() {
+console.log("jQuery sourced");
+//consoel.log(peopleArray[0]);
+//show each of array with name and shoutout
+var studentName ;
+var shoutOut;
+for (var i = 0; i< peopleArray.length; i++){
+
+  $('.container').append('<div></div');
+  var $el = $('.container').children().last();
+  $el.append('<p>' + peopleArray[i].name + '</p>' );
+  $el.append('<p>' + peopleArray[i].shoutout + '</p>');
+  $el.hide();
+  //put the grey boxes inside the buttonContainer class
+  $('.buttonContainer').append('<div data-name= "' + peopleArray[i].name + '" class="squareBox"><div>');
+
+console.log(peopleArray[i].name);
+  dataShow($el, peopleArray[i].name);
+
+  //   $el.show();
+
+}
+
+});
+
+function dataShow(studentArray, studentName) {
+
+//ar name = $el.data('name');
+console.log('name passed'  + studentArray);
+
+   $('.buttonContainer').on('click', '.squareBox', function() {
+     var name = $(this).data('name');
+     console.log('here' + name);
+
+    if (studentName === name) {
+     studentArray.show();
+     }else {
+       studentArray.hide();
+     }
+   });
+
+
+}

@@ -1,0 +1,8 @@
+.squareBox {
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-color: grey;
+  display: inline-block;
+  margin: 5px;
+}
