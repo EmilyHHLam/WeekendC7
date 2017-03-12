@@ -26,20 +26,23 @@ console.log("jQuery sourced");
 //show each of array with name and shoutout
 var studentName ;
 var shoutOut;
+var count =0;
 for (var i = 0; i< peopleArray.length; i++){
-
+  //count members
+  count = 1 + i;
   $('.container').append('<div></div');
   var $el = $('.container').children().last();
   $el.append('<p>' + peopleArray[i].name + '</p>' );
   $el.append('<p>' + peopleArray[i].shoutout + '</p>');
+  $el.append('<p> Chiyaks '+ count + '/' + peopleArray.length + '</p>');
   $el.hide();
-  //put the grey boxes inside the buttonContainer class
-  $('.buttonContainer').append('<div data-name= "' + peopleArray[i].name + '" class="squareBox"><div>');
 
-console.log(peopleArray[i].name);
+  //put the grey boxes inside the buttonContainer class
+  $('.buttonContainer').append('<div data-id= ' + i + ' data-name= "' + peopleArray[i].name + '" class=squareBox><div>');
+
   dataShow($el, peopleArray[i].name);
 
-  //   $el.show();
+
 
 }
 
@@ -47,18 +50,20 @@ console.log(peopleArray[i].name);
 
 function dataShow(studentArray, studentName) {
 
-//ar name = $el.data('name');
-console.log('name passed'  + studentArray);
 
+console.log('name passed'  + studentArray);
+ //console.log($this).length;
    $('.buttonContainer').on('click', '.squareBox', function() {
      var name = $(this).data('name');
-     console.log('here' + name);
+     var studentID = $(this).data('id');
 
     if (studentName === name) {
      studentArray.show();
+
      }else {
        studentArray.hide();
      }
+
    });
 
 
