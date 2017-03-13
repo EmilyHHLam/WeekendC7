@@ -41,40 +41,35 @@ function dataShow(personID) {
 
 
 
-
-  //woring on the display the color of selected object
-  //console.log(personID);
-  //console.log($('.buttonContainer').parent('squareBox').attr('data-id'));
-  //console.log('datashow=' + selectedPersonID);
-  // if (personID === 1 ) {
-  // }
-
-
 }
 $(document).ready(function() {
-console.log("jQuery sourced");
-//consoel.log(peopleArray[0]);
-//show each of array with name and shoutout
-var studentName ;
-var shoutOut;
-var count =0;
-for (var i = 0; i< peopleArray.length; i++){
-  //put the grey boxes inside the buttonContainer class
+  console.log("jQuery sourced");
+  //consoel.log(peopleArray[0]);
+  //show each of array with name and shoutout
+  var studentName ;
+  var shoutOut;
+  var count =0;
 
-var $box = $('<div data-id= ' + i + '" class="squareBox" id="box' + i + '"><div>');
-  $('.buttonContainer').append($box);
-
-  $box.click({personID: i}, function(evt) {
-
-    dataShow(evt.data.personID);
+  $('.buttonContainer').on('click', '.squareBox', function() {
+    var personId = $(this).data("id");
+    dataShow(personId);
   });
 
-} // loop end
+  for (var i = 0; i< peopleArray.length; i++){
+    //put the grey boxes inside the buttonContainer class
 
- $('.controlContainer').append('<button id="prev">PREV</button></span>&nbsp;&nbsp;');
- $('.controlContainer').append('<button id="next">NEXT</button></span>');
+    var $box = $('<div data-id="' + i + '" class="squareBox" id="box' + i + '"><div>');
+    $('.buttonContainer').append($box);
 
-clickControl();
+
+  } // loop end
+
+
+
+  $('.controlContainer').append('<button id="prev">PREV</button></span>&nbsp;&nbsp;');
+  $('.controlContainer').append('<button id="next">NEXT</button></span>');
+
+  clickControl();
 });
 
 
@@ -82,26 +77,32 @@ function clickControl() {
 
   //$('.controlContainer').on("click", "button", function() {
   $('#prev').click(function(){
-
+    //fadeIn and fadeOut for 500 miniseconds
+    $('.container').fadeOut(500, function () {
       selectedPersonID--;
 
-       if (selectedPersonID < 0){
-         //array 0-18, length-1 to back the last object
-         selectedPersonID = peopleArray.length-1;
-       }
-       console.log(selectedPersonID);
+      if (selectedPersonID < 0){
+        //array 0-18, length-1 to back the last object
+        selectedPersonID = peopleArray.length-1;
+      }
+
       dataShow(selectedPersonID);
+      $('.container').fadeIn(500);
+    });
+
+
 
   });
   $('#next').click(function(){
+    $('.container').fadeOut(500, function() {
+      selectedPersonID++;
+      if (selectedPersonID >= peopleArray.length){
+        selectedPersonID = 0;
+      }
 
-    selectedPersonID++;
-    if (selectedPersonID >= peopleArray.length){
-      selectedPersonID = 0;
-    }
-
-    dataShow(selectedPersonID);
-
+      dataShow(selectedPersonID);
+      $('.container').fadeIn(500);
+    });
   });
 
 }
