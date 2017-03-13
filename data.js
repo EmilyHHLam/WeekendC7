@@ -29,14 +29,24 @@ function dataShow(personID) {
   $el.append('<p>' + person.shoutout + '</p>');
   $el.append('<p>Chiyaks ' + count + '/' + peopleArray.length + '</p>');
   $('.container').html($el);
+
+  //remove all the blue selected
+  $('.squareBox').removeClass('selectedBlueBox');
+
+  //add into particular index
+  $("#box" + personID).addClass('selectedBlueBox');
+
+  $("#box" + personID).data('id');
   selectedPersonID = personID;
+
+
+
 
   //woring on the display the color of selected object
   //console.log(personID);
   //console.log($('.buttonContainer').parent('squareBox').attr('data-id'));
   //console.log('datashow=' + selectedPersonID);
   // if (personID === 1 ) {
-  // $(".squareBox").css({'background-color': 'salmon'});
   // }
 
 
@@ -51,10 +61,11 @@ var count =0;
 for (var i = 0; i< peopleArray.length; i++){
   //put the grey boxes inside the buttonContainer class
 
-var $box = $('<div data-id= ' + i + '" class="squareBox" ><div>');
+var $box = $('<div data-id= ' + i + '" class="squareBox" id="box' + i + '"><div>');
   $('.buttonContainer').append($box);
 
   $box.click({personID: i}, function(evt) {
+
     dataShow(evt.data.personID);
   });
 
