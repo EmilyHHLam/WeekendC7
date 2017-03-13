@@ -19,7 +19,21 @@ var peopleArray = [
   {name: "Brianna Marie Dickman", shoutout: "Shout out to Bri for noticing that I wasn't tracking and offering to go over the stuff again. She clarified things for me and I was able to move forward."},
   {name: "Daniel Zera", shoutout: "Dan because he has a great collaborative attitude and is very helpful."}
 ];
+var selectedPersonID = -1;
+function dataShow(personID) {
+  var person = peopleArray[personID];
+  // if (!person) {
+  //   return;
+  // }
+  var $el = $('<div></div>');
+  var count = personID + 1;
+  $el.append('<p>' + person.name + '</p>' );
+  $el.append('<p>' + person.shoutout + '</p>');
+  $('.container').html($el);
+  selectedPersonID = personID;
 
+  console.log(selectedPersonID);
+}
 $(document).ready(function() {
 console.log("jQuery sourced");
 //consoel.log(peopleArray[0]);
@@ -28,43 +42,49 @@ var studentName ;
 var shoutOut;
 var count =0;
 for (var i = 0; i< peopleArray.length; i++){
-  //count members
-  count = 1 + i;
-  $('.container').append('<div></div');
-  var $el = $('.container').children().last();
-  $el.append('<p>' + peopleArray[i].name + '</p>' );
-  $el.append('<p>' + peopleArray[i].shoutout + '</p>');
-  $el.append('<p> Chiyaks '+ count + '/' + peopleArray.length + '</p>');
-  $el.hide();
-
   //put the grey boxes inside the buttonContainer class
-  $('.buttonContainer').append('<div data-id= ' + i + ' data-name= "' + peopleArray[i].name + '" class=squareBox><div>');
+  var $box = $('<div data-id= ' + i + ' data-name= "' + peopleArray[i].name + '" class=squareBox><div>');
+  $('.buttonContainer').append(box);
 
-  dataShow($el, peopleArray[i].name);
+  $box.click({personID: i}, function(evt) {
+    dataShow(evt.data.personID);
+  });
 
+} // loop
+  console.log(count);
 
+ $('.controlContainer').append('<button id="prev">PREV</button></span>');
+ $('.controlContainer').append('<button id="next">NEXT</button></span>');
 
-}
-
+clickControl();
 });
 
-function dataShow(studentArray, studentName) {
+
+function showPerson(startAt) {
+    console.log('start at ' + startAt);
+    console.log('prev');
+    studentArray.next().show();
+}
+function clickControl() {
+
+  //$('.controlContainer').on("click", "button", function() {
+  $('#prev').click(function(){
+      console.log("prev");
 
 
-console.log('name passed'  + studentArray);
- //console.log($this).length;
-   $('.buttonContainer').on('click', '.squareBox', function() {
-     var name = $(this).data('name');
-     var studentID = $(this).data('id');
+  });
+  $('#next').click(function(){
+    //var personID = 1; // figure out the value based on the url hash
+    //var personID;
+    //var hashVal = location.hash.replace("#", "");
+    selectedPersonID++;
 
-    if (studentName === name) {
-     studentArray.show();
+    if (selectedPersonID >= peopleArray.length){
+      selectedPersonID = 0;
+    }
 
-     }else {
-       studentArray.hide();
-     }
+    dataShow(selectedPersonID);
 
-   });
-
+  });
 
 }
