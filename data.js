@@ -22,17 +22,16 @@ var peopleArray = [
 var selectedPersonID = -1;
 function dataShow(personID) {
   var person = peopleArray[personID];
-  // if (!person) {
-  //   return;
-  // }
+
   var $el = $('<div></div>');
   var count = personID + 1;
   $el.append('<p>' + person.name + '</p>' );
   $el.append('<p>' + person.shoutout + '</p>');
+  $el.append('<p>Chiyaks ' + count + '/' + peopleArray.length + '</p>');
   $('.container').html($el);
   selectedPersonID = personID;
 
-  console.log(selectedPersonID);
+  console.log();
 }
 $(document).ready(function() {
 console.log("jQuery sourced");
@@ -43,15 +42,16 @@ var shoutOut;
 var count =0;
 for (var i = 0; i< peopleArray.length; i++){
   //put the grey boxes inside the buttonContainer class
-  var $box = $('<div data-id= ' + i + ' data-name= "' + peopleArray[i].name + '" class=squareBox><div>');
-  $('.buttonContainer').append(box);
+
+var $box = $('<div style="background-color: salmon;" data-id= ' + i + '" class=squareBox><div>');
+  $('.buttonContainer').append($box);
 
   $box.click({personID: i}, function(evt) {
     dataShow(evt.data.personID);
   });
 
-} // loop
-  console.log(count);
+} // loop end
+
 
  $('.controlContainer').append('<button id="prev">PREV</button></span>');
  $('.controlContainer').append('<button id="next">NEXT</button></span>');
@@ -69,16 +69,20 @@ function clickControl() {
 
   //$('.controlContainer').on("click", "button", function() {
   $('#prev').click(function(){
-      console.log("prev");
 
+      selectedPersonID--;
+
+       if (selectedPersonID < 0){
+         //array 0-18, length-1 to back the last object
+         selectedPersonID = peopleArray.length-1;
+       }
+       console.log(selectedPersonID);
+      dataShow(selectedPersonID);
 
   });
   $('#next').click(function(){
-    //var personID = 1; // figure out the value based on the url hash
-    //var personID;
-    //var hashVal = location.hash.replace("#", "");
-    selectedPersonID++;
 
+    selectedPersonID++;
     if (selectedPersonID >= peopleArray.length){
       selectedPersonID = 0;
     }
