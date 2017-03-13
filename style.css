@@ -1,3 +1,9 @@
+
+body{
+  width: 600px;
+  margin: 20 auto;
+  padding: 20;
+}
 .squareBox {
   float: left;
   width: 20px;
@@ -7,6 +13,15 @@
   margin: 5px;
 }
 .container {
-
+  height:150px;
+  width: 600px;
   font-family: sans-serif;
+}
+
+.controlContainer {
+  width: 600px;
+}
+button {
+  align: center;
+  font-size: 30px;
 }
