@@ -31,7 +31,15 @@ function dataShow(personID) {
   $('.container').html($el);
   selectedPersonID = personID;
 
-  console.log();
+  //woring on the display the color of selected object
+  //console.log(personID);
+  //console.log($('.buttonContainer').parent('squareBox').attr('data-id'));
+  //console.log('datashow=' + selectedPersonID);
+  // if (personID === 1 ) {
+  // $(".squareBox").css({'background-color': 'salmon'});
+  // }
+
+
 }
 $(document).ready(function() {
 console.log("jQuery sourced");
@@ -43,7 +51,7 @@ var count =0;
 for (var i = 0; i< peopleArray.length; i++){
   //put the grey boxes inside the buttonContainer class
 
-var $box = $('<div style="background-color: salmon;" data-id= ' + i + '" class=squareBox><div>');
+var $box = $('<div data-id= ' + i + '" class="squareBox" ><div>');
   $('.buttonContainer').append($box);
 
   $box.click({personID: i}, function(evt) {
@@ -52,19 +60,13 @@ var $box = $('<div style="background-color: salmon;" data-id= ' + i + '" class=s
 
 } // loop end
 
-
- $('.controlContainer').append('<button id="prev">PREV</button></span>');
+ $('.controlContainer').append('<button id="prev">PREV</button></span>&nbsp;&nbsp;');
  $('.controlContainer').append('<button id="next">NEXT</button></span>');
 
 clickControl();
 });
 
 
-function showPerson(startAt) {
-    console.log('start at ' + startAt);
-    console.log('prev');
-    studentArray.next().show();
-}
 function clickControl() {
 
   //$('.controlContainer').on("click", "button", function() {
